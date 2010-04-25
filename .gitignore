@@ -1,0 +1,8 @@
+*.aux
+*.dvi
+*.log
+*.toc
+*.eps
+*.dia~
+*.ps
+*.png

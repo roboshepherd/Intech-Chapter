@@ -4,6 +4,10 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{makeidx}
+\usepackage{
+  fancyhdr,lscape,rotating,float,longtable,
+  epsfig,program,tabularx,graphicx,hyperref,url,harvard,multicol,
+}
 %\author{Md Omar Faruque Sarker and Torbjorn S. Dahl}
 \author{Md Omar Faruque Sarker and Torbj{\o}rn S. Dahl\\ %etc.
 %}
@@ -12,29 +16,26 @@
 \small
 Robotic Intelligence Lab, University of Wales, Newport\\
 \small
-Allt-yr-yn Campus, Allt-yr-yn Avenue, Newport, NP205DA, UK\\
+Allt-yr-yn Campus, Allt-yr-yn Avenue, Newport, NP205XR, UK\\
 \small
-Mdomarfaruque.Sarker|Torbjorn.Dahl@newport.ac.uk
+Mdomarfaruque.Sarker \vline  Torbjorn.Dahl@newport.ac.uk
 }
-\title{Bio-inspired Direct Communication for Self-regulated Multi-robot System (MRS)}
+\title{Bio-inspired Communication for Self-regulated Multi-robot Systems (MRS)}
 \begin{document}
 \maketitle
-\textbf{Proposed Chapter Outline:}
-\begin{enumerate}
-\item Introduction
-\item Atrractive Field Model - A Mechanism for Self-regulation in MRS
-\item Communication in Biological Social Systems
-\item Bio-inspired Direct Communication for MRS - A Case Study
-\item Related Work
-\item Conclusion
-\newpage 
+%
 \textbf{\large Abstract}\\
-This chapter intends to present a timely analysis on various direct communication strategies of multi-robot systems (MRS) along with our case study of implementing communication systems for  a large MRS with 40 robots. Both  centralized and local communication strategies are described in the context of self-regulated multi-robot task allocation (MRTA). Communication is the essence of any social interaction among individuals and their environments. In biological literature, animal communication has been broadly classified into two classes: direct or explicit communication and indirect or implicit communication (e.g., stigmergy of ants through pheromone trails). In this chapter, we intend to highlight mainly on direct communication with a limited coverage on indirect communication.
 
-Since biological studies of communications of various social insects and other animals become one the major inspirations for designing scalable communication system for large MRS. Particularly, a branch of MRS called swarm robotics (SR) has been solely established by following the natural mechanisms of self-organizations in various social insects and other biological species. These self-regulated social systems provide us with living examples of scalable and flexible social communication systems  that effectively serve their various social needs.  In this article, we intend to review briefly on various biological communication systems in terms of communication modalities, information flow, group size, productivity and so forth.
+In this book chapter, we intend to present a timely analysis on various direct communication strategies of multi-robot systems (MRS) along with our case study of implementing communication systems for a large MRS with 40 robots. Both centralized and local communication strategies are explored within the context of self-regulated multi-robot task allocation (MRTA). For this purpose, we have used our collaborative trans-disciplinary model of division of labour called as attractive field model (AFM) \cite{Arcaute+2008}. Moreover, we intend to present the scale-freeness of our implementation using our experimental evidences with varying robot group size (8-40), experimental area (2-10 $m^2$) and number of tasks (2-10).
  
-In order to illustrate the suitable mechanisms for communication in MRS, we consider to put our study in the context of a self-regulated phenomena, i.e., division of labour that is also described as MRTA in MRS. As a part of a collaborative project, we have studied the behaviour of ants, humans and robots and have developed the attractive field model (AFM), a common formal model of division of labour in social systems. In this chapter we would like to present the validation of AFM that brings self-regulated task allocation in our large MRS. AFM relies on the presence of a system-wide continuous flow of information. Here our particular implementation shows that an interdisciplinary generic model of division of labour like AFM can not be realized in a MRS without an effective communication system. Our comparative results of self-regulated MRTA using both centralized and local communication system can illustrate this fact more vividly.
+In order to illustrate the suitable mechanisms for communication in MRS, we have put our work in the context of a self-regulated phenomena, i.e., division of labour or MRTA. As a part of a collaborative EPSRC(UK) project {\em ``Defying the rules: How self-regulating systems work''}, we have studied the behaviour of ants, humans and robots and have developed AFM, a common formal model of division of labour in social systems. Here, we would like to introduce AFM formally by describing its general characteristics and underlying mathematical model. However, scientific models can not gain wider acceptance without validating those models by experiments with real systems. In our case, AFM has been originated from the study of ants, robots and humans and systematically tested through computer simulations and its validation is well under-way by putting it in human social systems and real robotic systems. In our part, we would like to present the validation of AFM that brings self-regulated task allocation in our large MRS though a set of generic rules derived from the study of biological, human and artificial social systems \cite{Sarker+2010ants}.
+ 
+Communication is the essence of any social interaction among individuals and their environments. Since biological studies of communications of various social insects and other animals become one the major inspirations for designing scalable communication system for large MRS. Particularly, a branch of MRS called swarm robotics (SR) has been solely established by following the natural mechanisms of self-organizations in various social insects and other biological species \cite{Bonabeau+1999}. These self-regulated social systems provide us with living examples of scalable and flexible social communication systems that effectively serve their various social needs. In biological literature, animal communication has been broadly classified into two classes: direct or explicit communication and indirect or implicit communication (e.g., stigmergy of ants through pheromone trails) \cite{Balch+1994comm,Labella2007}. In this article, we intend to review briefly on various biological communication systems in terms of communication modalities, information flow, group size, productivity and so forth. Along with that, we also intend to review the state-of-the art of communication in multi-robot systems. 
+AFM relies on the presence of a system-wide continuous flow of information. Here our particular implementation shows that an interdisciplinary generic model of division of labour like AFM can not be realized effectively in a MRS without a suitable communication system. In this book chapter, the inclusion of our comparative results of self-regulated MRTA using both centralized and local communication systems can illustrate this fact more vividly \cite{Sarker+2010iros}.
 
-This book chapter is organized as follows. Section~2 presents attractive field model (AFM) that is used as a multi-robot task allocation (MTRA) mechanism. Section~3 reviews the various communication strategies found in biological systems. Section~4 describes our case study of bio-inspired direct communication model along with our implementation of MRTA including the interactions between the hardware, software and communication modules.  Section~5 discusses related background works and section~6 draws conclusions.
-\end{enumerate}
+We also intend to describe the scale-freeness of our MRS from the experimental evidences from a number of experiments by varying certain parameters (i.e., number of robots, tasks and area size) such that their ratio or characteristic scale remains constant. This kind of study is not widely reported in MRS literature except only a few (e.g. \cite{Gustafson+2006}). Thus our study intends to fill that gap, particularly with a large number of real robots (upto 40).
+
+This book chapter can be organized as follows. After presenting an introduction in Section~1, Section~2 can present attractive field model (AFM). Section~3 can describe the validation of this model in our MRS. Section~4 can review the various communication strategies found in biological and robotic systems. Section~5 can describe results of our centralized and local communication experiments. Section~6 can discuss scale-freeness of our system. Section~7 can present related background works and section~8 includes discussions and conclusions.
+\bibliographystyle{jphysicsB}
+\bibliography{intech-book}
 \end{document}

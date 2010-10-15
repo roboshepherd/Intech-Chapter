@@ -82,103 +82,89 @@ Multi-robot Systems} % You know your chapter title?
 %==== Y Z ==== 
 \end{acronym}
 %%
-
 \section{Introduction}
-In recent years, the study of biological social insects and other animals reveals us that simple individuals of these self-organized  societies can solve various complex and large everyday-problems with a few behavioural rules \citep{Camazine+2001}. In these self-organized systems, an individual agent may have limited cognitive, sensing and communication capabilities. But they are collectively capable of solving complex and large problems, e.g. coordinated nest construction of honey-bees, collective defence of school fishes from a predator attack, ordered homing of bats.  Since the discovery of these collective behavioural patterns of self-organized societies, scientists observed modulation or adaptation of behaviours in the individual level \citep{Garnier+2007}. One of the most notable such self-regulatory processes in biological social systems is the \textit{division of labour} (DOL) \citep{Sendova-Franks+1999} by which a larger task is divided into a number of small subtasks and each subtask is performed by a separate individual or a group of individuals. 
+In recent years, the study of biological social insects and other animals reveals us that simple individuals of these self-organized societies can solve various complex and large everyday-problems with a few behavioural rules \citep{Camazine+2001}. In these self-organized systems, an individual agent may have limited cognitive, sensing and communication capabilities. But they are collectively capable of solving complex and large problems, e.g. coordinated nest construction of honey-bees, collective defence of school fishes from a predator attack. Since the discovery of these collective behavioural patterns of self-organized societies, scientists observed modulation of behaviours in the individual level \citep{Garnier+2007}. One of the most notable such self-regulatory processes in biological social systems is the \textit{division of labour} (DOL) \citep{Sendova-Franks+1999} by which a larger task is divided into a number of small subtasks and each subtask is performed by a separate individual or a group of individuals. {\em Task-specialization} is an integral part of DOL where a worker usually does not perform all tasks, but rather specializes in a set of tasks, according to its morphology, age, or chance \citep{Bonabeau+1999}. DOL is also characterized by {\em plasticity} which means that the removal of one class of workers is quickly compensated for by other workers. Thus distributions of workers among different concurrent tasks keep changing according to the environmental and internal conditions of a colony. 
 
-From the study of social insects and other biological societies, we can find that two major properties of DOL have been established in literature.
-\begin{enumerate}
-\item[\textbf{Task-specialization.}]
-%\newline
-{\em Task-specialization} is an integral part of DOL where a worker usually does not perform all tasks, but rather specializes in a set of tasks, according to its morphology, age, or chance \citep{Bonabeau+1999}. %This DOL among nest-mates, whereby different activities are performed simultaneously by groups of specialized individuals, is believed to be more efficient than if tasks are performed sequentially by unspecialised individuals.
-%
-\item[\textbf{Plasticity.}]
-DOL is also characterized by {\em plasticity} which means that the removal of one class of workers is quickly compensated for by other workers. Thus distributions of workers among different concurrent tasks keep changing according to the external (environmental) and internal conditions of a colony \citep{Garnier+2007}. 
-\end{enumerate}
+In artificial social systems, like multi-agent or multi-robot system, the term ``division of labour'' is often found synonymous to ``task-allocation'' \citep{Shen+2001}. In robotics, this is called \textit{multi-robot task allocation} (MRTA) which is generally identified as the question of assigning tasks in an appropriate time to the appropriate robots considering the changes of in task-requirements, environment and the performance of other team members. The complexities of the distributed MRTA problem arise from the fact that there is no central planner or coordinator for task assignments, and generally robots have limited capabilities to sense, to communicate and to interact locally. In this chapter, we have presented this issue of DOL as the representative self-regulatory process in both biological and artificial social systems. We have used the terms DOL and MRTA (or simply, task-allocation) interchangeably.
+ 
+Traditionally, task allocation in a multi-agent systems has been dominated by explicit and self-organized task-allocation approaches. Explicit approaches, e.g. intentional cooperation \citep{Parker2008}, use of dynamic role assignment \citep{Chaimowicz2002} and market-based bidding approach \citep{Dias+2006} are intuitive, comparatively straight forward to design and implement and can be analysed formally. However, these approaches typically works well only when the number of robots are small ($\leq 10$) \citep{Lerman+2006}. On the other hand bio-inspired self-organized task-allocation relies on the emergent group behaviours, such as emergent cooperation \citep{Kube+1993}, adaptation rules \citep{Liu+2007} etc. They are more robust and scalable to large team sizes. However, this  approach is difficult to design, to analyse formally and to implement in real robots. Existing researches under this approach mostly limit their focus on one specific global task \citep{Gerkey+2004}.
 
-In artificial social systems, like multi-agent or multi-robot system, the term ``division of labour'' is often found synonymous to ``task-allocation'' \citep{Shen+2001}. In robotics, this is called \textit{multi-robot task allocation} (MRTA) which is generally identified as the question of assigning tasks in an appropriate time to the appropriate robots considering the changes of the environment and/or the performance of other team members \citep{Gerkey+2004}. In this chapter, we have presented this issue of DOL as the representative self-regulatory process in both biological and artificial social systems. We have used the terms DOL and MRTA (or simply, task-allocation) interchangeably. 
+Within the context of the Engineering and Physical Sciences Research Council (EPSRC) project, ``Defying the Rules: How Self-regulatory Systems Work'', we have proposed to solve the above mentioned self-regulated DOL problem in an alternate way \citep{Arcaute+2008}. Our approach is inspired from the studies of emergence of task-allocation in both biological and human social systems. We have proposed four generic requirements to explain self-regulation in those social systems. These four rules are: \textit{continuous flow of information}, \textit{concurrency}, \textit{learning} and \textit{forgetting}. Primarily these rules deal with the issue of deriving local control laws for regulating an individual's task-allocation behaviour that can facilitate the DOL in the entire group. In order to employ these rules in the individual level, we have developed a formal model of self-regulated DOL, called the \textit{attractive field model} (AFM). Section 2 reviews our generic requirements of self-organization and AFM.
 
-The complexities of the distributed MRTA problem arise from the fact that there is no central planner or coordinator for task assignments, and in a large multi-robot systems, generally robots have limited capabilities to sense, to communicate and to interact locally. Traditionally, task allocation in a multi-agent systems has been divided into the following two major categories.
-\begin{enumerate}
-\item[\textbf{Predefined task-allocation.}]
-%\newline
-Early research on predefined task-allocation was dominated by intentional coordination \citep{Parker2008}, use of dynamic role assignment \citep{Chaimowicz2002} and market-based bidding approach \citep{Dias+2006}. Under these approaches, robots use direct task-allocation method, often to communicate with group members for negotiating on tasks. These approaches are intuitive, comparatively straight forward to design and implement and can be analysed formally. However, these approaches typically works well only when the number of robots are small ($\leq 10$) \citep{Lerman+2006}.
-%
-\item[\textbf{Bio-inspired self-organized task-allocation.}]
-This approach relies on the emergent group behaviours, such as emergent cooperation \citep{Kube+1993}, adaptation rules \citep{Liu+2007} etc. They are more robust and scalable to large team sizes. However, most of the robotic researchers found that self-organized task-allocation approach is difficult to design, to analyse (formally) and to implement in real robots. 
-\end{enumerate}
+In biological social systems, communication among the group members and  sensing the task-in-progress, are two key components of self-organized DOL. In robotics, existing self-organized task-allocation methods rely heavily upon local sensing and local communication of individuals for achieving self-organized task-allocation. However, AFM differs significantly in this point by avoiding the strong dependence on the local communications and interactions. AFM requires a system-wide continuous flow of information about tasks, agent states etc. but this can be achieved by using both centralized and decentralized communication modes under explicit and implicit communication strategies. 
 
-Within the context of the Engineering and Physical Sciences Research Council (EPSRC) project, ``Defying the Rules: How Self-regulatory Systems Work'', we have proposed to solve the above mentioned self-regulated DOL problem in an alternate way \citep{Arcaute+2008}. Our approach is inspired from the studies of emergence of task-allocation in both biological and human social systems in which we have found that a large number of species grow, evolve and generally continue functioning well by the virtue of their individual self-regulatory DOL systems. We have proposed four generic rules to explain self-regulation in those social systems. These four rules are: \textit{continuous flow of information}, \textit{concurrency}, \textit{learning} and \textit{forgetting} - all of them will be explained later. Primarily these rules deal with the issue of deriving local control laws for regulating an individual's task-allocation behaviour that can facilitate the DOL in the entire group. In order employ these rules in the individual level, we have developed a formal model of self-regulated DOL, called the attractive field model (AFM). AFM provides an abstract framework for self-regulatory DOL in social systems. 
-
-In biological social systems, communications among the group members, as well as sensing the task-in-progress, are two key components of self-organized DOL. In robotics, existing self-organized task-allocation methods rely heavily upon local sensing and local communication of individuals for achieving self-organized task-allocation. However, AFM differs significantly in this point by avoiding the strong dependence on the local communications and interactions found in many existing approaches to MRTA. AFM requires a system-wide continuous flow of information about tasks, agent states etc. but this can be achieved by using both centralized and decentralized communication modes under explicit and implicit communication strategies. 
-
-In order to enable continuous flow of information in our multi-robot system, we have implemented two types of sensing and communication strategies inspired by the self-regulated DOL found in two types of social wasps: {\em polistes} and {\em polybia} \citep{Jeanne1999}. Depending on the group size, these species follow different strategies for communication and sensing of tasks. Polistes wasps are called the {\em independent founders} in which reproductive females establish colonies alone or in small groups (in the order of $10^2$), but independent of any sterile workers. On the other hand, polybia wasps are called the {\em swarm founders} where a swarm of workers and queens initiate colonies consisting of several hundreds to millions of individuals.
-
-The most notable difference in the organization of work of these two social wasps is: independent founders do not rely on any cooperative task performance while swarm founders interact with each-other locally to accomplish their tasks. The work mode of independent founders can be considered as {\em global sensing - no communication (GSNC)} where the individuals sense the task requirements throughout a small colony and do these tasks without communicating with each other. On the other hand, the work mode of swarm founders can be treated as {\em local sensing - local communication (LSLC)} where the individuals can only sense tasks locally due to large colony-size and they can communicate locally to exchange information, e.g. task-requirements (although their exact mechanism is unknown). In this chapter, we have used these two sensing and communication strategies to compare the performance of the self-regulated DOL of our robots under AFM.
-%
-%==============================================================
-\section{The Attractive Field Model (AFM)}
-\label{afm}
-\subsection{Generic framework}
+In order to enable continuous flow of information in our multi-robot system, we have implemented two types of sensing and communication strategies inspired by the self-regulated DOL found in two types of social wasps: {\em polistes} and {\em polybia} \citep{Jeanne1999}. Depending on the group size, these species follow different strategies for communication and sensing of tasks. Polistes wasps are called the {\em independent founders} in which reproductive females establish colonies alone or in small groups (in the order of $10^2$), but independent of any sterile workers. On the other hand, polybia wasps are called the {\em swarm founders} where a swarm of workers and queens initiate colonies consisting of several hundreds to millions of individuals. The most notable difference in the organization of work of these two social wasps is: independent founders do not rely on any cooperative task performance while swarm founders interact with each-other locally to accomplish their tasks. The work mode of independent founders can be considered as {\em global sensing - no communication (GSNC)} where the individuals sense the task requirements throughout a small colony and do these tasks without communicating with each other. On the other hand, the work mode of swarm founders can be treated as {\em local sensing - local communication (LSLC)} where the individuals can only sense tasks locally due to large colony-size and they can communicate locally to exchange information, e.g. task-requirements (although their exact mechanism is unknown). In this chapter, we have used these two sensing and communication strategies to compare the performance of the self-regulated DOL of our robots under AFM.
+%===================================================================
+\section{The Attractive Field Model}
 \label{afm:framework}
-Inspired from the DOL in ants, humans and robots,  we  have proposed the following four {\em generic rules of self-regulation}.
+Inspired from the DOL in ants, humans and robots, we have proposed the following necessary and sufficient set of four requirements for self-regulation in social systems.
 
-\textbf{Rule 1: Continuous flow of information.} Self-regulatory social systems establish a system-wide continuous minimum flow of information. This should help to maintain at least two states of an agent: i) to receive information about task(s) and ii) to ignore information or doing no task. The up-to-date information should reflect  the changes of the system i.e. it should encode the necessary feedback for the agents.
+\textbf{Requirement 1: Concurrence.} The simultaneous presence of several task options is necessary in order to meaningfully say that the system has organised into a recognisable structure.   In task-allocation terms the minimum requirement is a single task as well as the option of not performing any task.
 
-\textbf{Rule 2: Sensitization}. Self-regulatory social systems allow the differentiation in the use of  (or access to) information, e.g. through sensitization or learning of some tasks. This differentiation is regulated by the characteristics of the system, e.g. the ability of the agents to learn tasks that are repeatedly performed.
+\textbf{Requirement 2: Continuous flow of information.} Self-organised social systems establish a flow of information over the period of time when self-organisation can be defined.  The task information provides the basis on which the agents self-organise by enabling them to perceive tasks and receive feedback on system performance.
 
-\textbf{Rule 3: Concurrence.} Self-regulatory social systems include concurrent access to information from different spatial locations with certain preferences. This preference is not fixed and can change with the dynamics of the system. 
+\textbf{Requirement 3: Sensitization.} The system must have a way of representing the structure produced by self-organisation, in terms of MRTA, which tasks the robots are allocated.  One of the simplest ways of representing this information is an individual preference parameter for each task-robot combination.  A system where each robot has different levels of preference or {\em sensitivity} to the available tasks, can be said to have to embody a distinct organisation through differentiation.
 
-\textbf{Rule 4: Forgetting.} Self-regulatory social systems include forgetting, e.g. the ability of the agents to diminish information over time, if not used. The system determines the amount of information being released, and this may change over time.
+\textbf{Requirement 4: Forgetting.} When a system self-organises by repeated increases in individual sensitisation levels, it is also necessary, in order to avoid saturation, to have a mechanism by which the sensitisation levels are reduced or {\em forgotten}.  Forgetting also allows flexibility in the system, in that the structure can change as certain tasks become important and other tasks become less so. % This effect can be achieved by mechanisms such as a slow general decay of sensitisation values or explicit negative feedback.
 %%
 \begin{figure}
 \centering
-\includegraphics[height=5cm]{./images/AFM-Diag2.eps}
+\includegraphics[height=5cm, angle=0]{./images/AFM-Diag3.eps}
 \caption{The attractive filed model (AFM)}
 \label{fig:afm} % Give a unique label
 \end{figure}
-Having this general framework of self-regulatory social systems, we can now formalize AFM that will describe the properties of individual  agents and the system as a whole. In terms of networks, the model is a bipartite network, i.e. there are two different types of nodes. One set of nodes describes the sources of the attractive fields and the other set describes the agents. Links only exist between different types of nodes and they encode the flow of information so that, even if there is no direct link between two agents, their interaction is taken into account in the information flow. This is an instance of {\em weak} interaction. The strength of the field primarily depends upon the distance between the task and the agent. This relationship is represented using weighted links. Besides, there is a permanent field that represents the {\em no-task} or  option for ignoring information. The model can be mapped to a network as shown in Fig. \ref{fig:afm}. %The correspondence is given below:
+
+Building on the requirements for self-organised social systems, AFM formalises these requirements in terms of the relationships between properties of individual agents and of the system as a whole \citet{Arcaute+2008}.  AFM is a bipartite network, i.e. there are two different types of nodes.  One set of nodes describes the sources of the attractive fields, the tasks, and the other set describes the agents.  Edges only exist between different types of nodes and they encode the strength of the attractive field as perceived by the agent.  There are no edges between agent nodes.  All communication is considered part of the attractive fields.  There is also a permanent field representing the {\em no-task} option of not working in any of the available tasks.  This option is modelled as a random walk.  The model is presented graphically in Fig. \ref{fig:afm}.  The elements are depicted as follows.
 %\begin{enumerate}
 %\item 
-Source nodes (o) are tasks that can be divided between a number of agents.
+Source nodes (o) are tasks to be allocated to agents.
 %\item 
-Agent nodes (x) an be ants, human,  robots etc.
+Agent nodes (x) e.g., ants, humans, or robots.
 %\item 
-The attractive fields correspond to stimuli to perform a task, and these are given by the black solid lines.
+Black solid edges represent the attractive fields and correspond to an agent's perceived stimuli from each task.
 %\item 
-When an agent performs a task, the link becomes different, and this is denoted in the figure by a dashed line. Agents linked to a source by a red line are the agents currently doing that task. 
+Green edges represent the attractive field of the ever present no-task option, represented as a particular task (w).
 %\item 
-The field of ignoring the information (w) corresponds to the stimulus to random walk, i.e. the no-task option, and this is denoted by the dotted lines in the graph. 
-%\item 
-Each of the links is weighted. The value of this weight describes the strength of the stimulus that the agent experiences. In a spatial representation of the model, it is easy to see that the strength of the field depends on the physical distance of the agent to the source. Moreover, the strength can be increased through sensitisation of the agent via experience (learning). This distance is not depicted in the network, it is represented through the weights of the links. %In the figure of the network (Fig. \ref{fig:afm}), the nodes have arbitrary places. Note that even though the distance is physical in this case, the distance in the model applied to other systems, needs not to be physical. It can represent the accessibility to the information, the time the information takes to reach the receiver, etc. 
+The red lines are not edges, but represent how each agent is allocated to a single task at any point in time.
 %\end{enumerate}
-%In summary, from the above diagram of the network, we can see that each of the agents is connected to each of the fields. This means that even if an agent is currently involved in a task, the probability that it stops doing it in order to pursue a different task, or to random walk, is always non-zero. The weighted links express the probability of an agent to be attracted to each of the fields.
-%---------------------------------------------------------------
-\subsection{Interpretation of AFM in multi-robot systems}
-\label{afm:mrs-interpretation}
-The interpretation of AFM in a multi-robot system follows the above mentioned generic interpretation. Let us consider a multi-tasking environment, where $N$ number of autonomous mobile robots are required to attend $J$ number of tasks spread over a fixed area $A$. 
+The edges of the AFM network are weighted and the value of this weight describes the strength of the stimulus as perceived by the agent.  In a spatial representation of the model, the strength of the field depends on the physical distance of the agent to the source.  In information-based models, the distance can represent an agent's level of understanding of that task.  The strength of a field is increased through the sensitisation of the agent through experience with performing the task.  This elements is not depicted explicitly in Figure~\ref{fig:afm} but is represented in the weights of the edges.  
+In summary, from the above diagram of the network, we can see that each of the agents is connected to each of the tasks. This means that even if an agent is currently involved in a task, the probability that it stops doing it in order to pursue a different task, or to random walk, is always non-zero.
 
-Let a task $j$ has an associated task-urgency $\phi_j$ indicating its relative importance over time.
-If a robot attends a task $j$ in the $x^{th}$ time-step, the value of $\phi_j$ will decrease by an amount $\delta_{\phi_{INC}}$ in the $(x+1)^{th}$ time-step.
-On the other hand, if a task has not been served by any robot in the $x^{th}$ time-step, $\phi_j$ will increase by another amount  $\delta_{\phi_{DEC}}$  in $(x+1)^{th}$ time-step. Thus
-%-- Phi update
-urgency of a task is updated by the following rules.
-\begin{small}
+AFM assumed a repeated task selection by individual agents.  The probability of an agent choosing to perform a task is proportional to the strength of the task's attractive field, as given by Equation~\ref{eqn:afm3}.
 \begin{equation}
- If\hspace*{0.15cm}the\hspace*{0.15cm} task\hspace*{0.15cm}is\hspace*{0.15cm}not\hspace*{0.15cm}being\hspace*{0.15cm} done:\hspace*{0.15cm}  \phi_j \rightarrow   \phi_j \hspace*{0.15cm} + \delta_{\phi_{INC}}
+P_{j}^{i} = \frac{S_{j}^{i}}{\sum_{j=0}^{J} S_{j}^{i}} \hspace*{0.25cm}where,\hspace*{0.25cm}S^{i}_{0} = S^{i}_{RW}   
+\label{eqn:afm3}
+\end{equation}
+Equation~\ref{eqn:afm3} states that the probability of an agent, $i$, selecting a task, $j$, is proportional to the stimulus, $ S^i_j$, perceived from that task, with the sum of all the task stimuli normalised to $1$.
+
+The strength of an attractive field varies according to how sensitive the agent is to that task, $k_{j}^{i}$, the distance between the task and the agent, $d_{ij}$, and the {\em urgency}, $\phi _{j}$ of the task.  In order to give a clear edge to each field, its value is modulated by the hyperbolic tangent function, $tanh$.  Equation~\ref{eqn:afm1} formalises this part of AFM.
+%% S
+\begin{equation}
+S_{j}^{i} = tanh\{\frac{k_{j}^{i}}{d_{ij}+\delta } \phi _{j}\}
+\label{eqn:afm1}
+\end{equation}
+Eqation~\ref{eqn:afm1}, used small constant $\delta$, called {\em delta distance}, to avoid division by zero, in the case when a robot has reached to a task.
+
+Equation~\ref{eqn:afm2} shows how AFM handles the the no-task, or random walk, option.  The strength of the stimuli of the random walk task depends on the strengths of the fields real tasks.  In particular, when the other tasks have a low overall level of sensitisation, i.e., relatively weak fields, the strength of the random walk field if relatively high.  On the other hand, when the agent is highly sensitised, the strength of the random walk field becomes relatively low.  We use $J$ to denote the number of real tasks.  AFM effectively considers random walking as an ever present additional task.  Thus the total number of tasks becomes $J+1$. %--P(Task)
+\begin{equation}
+S^{i}_{RW} = tanh \left \{ 1 -  \frac{ \sum_{j=1}^{J} S^{i}_{j}}{J + 1} \right \}
+\label{eqn:afm2}
+\end{equation}
+%-- P(RW)
+
+A task $j$ has an associated urgency $\phi_j$ indicating its relative importance over time.  If an agent attends a task $j$ in time step $t$, the value of $\phi_j$ will decrease by an amount $\delta_{\phi_{INC}}$ in the time-step $t+1$.  On the other hand, if a task has not been served by any of the agents in time-step $t$, $\phi_j$ will increase by a different amount, $\delta_{\phi_{DEC}}$ in time-step $t+1$.  This behaviour is formalised in Equations~\ref{eqn:delta-phi1} and~\ref{eqn:delta-phi2}.
+\begin{equation}
+ If\hspace*{0.15cm}the\hspace*{0.15cm} task\hspace*{0.15cm}is\hspace*{0.15cm}not\hspace*{0.15cm}being\hspace*{0.15cm} done:\hspace*{0.15cm} \phi_{j,t+1} \rightarrow \phi_{j,t} \hspace*{0.15cm} + \delta_{\phi_{INC}}
 \label{eqn:delta-phi1}
 \end{equation}
 %%
 \begin{equation}
- If\hspace*{0.15cm}the \hspace*{0.15cm}task\hspace*{0.15cm}is\hspace*{0.15cm}being\hspace*{0.15cm}done:\hspace*{0.15cm}  \phi_j \rightarrow   \phi_j \hspace*{0.15cm} - n\hspace*{0.10cm}\delta_{\phi_{DEC}}
+ If\hspace*{0.15cm}the \hspace*{0.15cm}task\hspace*{0.15cm}is\hspace*{0.15cm}being\hspace*{0.15cm}done:\hspace*{0.15cm}  \phi_{j,t+1} \rightarrow \phi_{j,t} \hspace*{0.15cm} - n\hspace*{0.10cm}\delta_{\phi_{DEC}}
 \label{eqn:delta-phi2}
 \end{equation}
-\end{small}
-Eq. \ref{eqn:delta-phi1} refers to a case where no robot attend to task $j$ and Eq. \ref{eqn:delta-phi2} refers to another case where $n$ robots are concurrently performing the task $j$.
+Equation~\ref{eqn:delta-phi1} refers to a case where no agent attends to task $j$ and Equation~\ref{eqn:delta-phi2} to the case where $n$ agents are concurrently performing task $j$.
 
-In order to complete a task $j$, a robot $r_i$ needs to be within a fixed boundary $D_{j}$. If a robot completes a task $j$ it learns about it and this will influence $r_i$'s likelihood of selecting that task in future, say through increasing  its sensitization to $j$ by a small amount, $k_{INC}$. Here, the variable affinity of a robot $r_i$ to task $j$ is called as its {\em sensitization} $k^{i}_{j}$. If a robot $i$ does not do a task $j$ for some time, it forgets about $j$ and $k^i_j$ is decreased, by another small amount, say $k_{DEC}$. Thus a robot's task-sensitization is updated by following Eq. \ref{eqn:k-inc} and Eq. \ref{eqn:k-dec}.
-According to AFM, all robots will establish attractive fields to all tasks due to the presence of a system-wide continuous flow of information. The strength of these attractive fields will vary according to the dynamic distances between the robots and tasks, task-urgencies and corresponding sensitizations of robots. Simplifying the generic implementation of AFM from \citet{Arcaute+2008}, we can formally encode this stimuli of attractive field as stated in Eq. \ref{eqn:afm1}
-\begin{small}
+In order to complete a task, an agent needs to be within a fixed distance of that task.  When an agent performs a task, it learns about it and this will increases the probability of that agent selecting that task in the future.  This is done by increasing its sensitization to the task by a fixed amount, $k_{INC}$. The variable affinity of an agent, $i$, to a task, $j$, is called its {\em sensitization} to that task and is denoted $k^{i}_{j}$.  If an agent, $i$, does not do a task $j$, $k^i_j$ is decreased by a different fixed amount, $k_{DEC}$.  This behaviour is formalised in Equations~\ref{eqn:k-inc} and~\ref{eqn:k-dec}.
 \begin{equation}
  If\hspace*{0.15cm}task\hspace*{0.15cm}is\hspace*{0.15cm}done:\hspace*{0.15cm}  k^i_j \rightarrow   k^i_j \hspace*{0.15cm} + \hspace*{0.15cm} k_{INC}
 \label{eqn:k-inc}
@@ -187,79 +173,27 @@ According to AFM, all robots will establish attractive fields to all tasks due t
  If\hspace*{0.15cm}task\hspace*{0.15cm}is\hspace*{0.15cm}not\hspace*{0.15cm}done:\hspace*{0.15cm}  k^i_j \rightarrow   k^i_j \hspace*{0.15cm} - \hspace*{0.15cm} k_{DEC}
 \label{eqn:k-dec}
 \end{equation}
-\end{small}
-%%
-%% S
-\begin{small}
-\begin{multicols}{2}
-\begin{equation}
-S_{j}^{i} = tanh\{\frac{k_{j}^{i}}{d_{ij}+\delta } \phi _{j}\}
-\label{eqn:afm1}
-\end{equation}
-%--P(Task)
-\begin{equation}
-S^{i}_{RW} = tanh \left \{ 1 -  \frac{ \sum_{j=1}^{J} S^{i}_{j}}{J + 1} \right \}
-\label{eqn:afm2}
-\end{equation}
-\end{multicols}
-\end{small}
-%--------------------------
-%\vspace*{0.25cm}
-%-- P(RW)
-\begin{small}
-\begin{equation}
-P_{j}^{i} = \frac{S_{j}^{i}}{\sum_{j=0}^{J} S_{j}^{i}} \hspace*{0.25cm}where,\hspace*{0.25cm}S^{i}_{0} = S^{i}_{RW}   
-\label{eqn:afm3}
-\end{equation}
-\end{small}
-Eq. \ref{eqn:afm1} states that the stimuli of a robot $r_i$ to a particular task $j$, $S^{i}_{j}$ depends on $r_i$'s spatial distance to $j$ ($d_{ij}$), level of sensitization to $j$ ($k_{j}^{i}$), and perceived urgency of that task ($\phi _{j}$). In  Eq. \ref{eqn:afm1}, we have used a very small constant value $\delta$, called {\em delta distance}, to avoid division by zero, in the case when a robot has reached to a task. Since $S^{i}_{j}$ is a probability function, it is chosen as a $tanh$ in order to keep the values between 0 and 1. Eq. \ref{eqn:afm2} suggests us how we can estimate the stimuli of random walk or no-task option. This stimuli of random walk depends on the sum of stimulus of $J$ real tasks. Here, random-walk is also considered as a task. Thus the total number of tasks become $J+1$. The probability of selecting each task has been determined by a probabilistic method outlined in Eq. \ref{eqn:afm3} which states that the probability of choosing a task $j$ by robot $r_i$ is directly proportional to its calculated stimuli $ S^i_j$. 
-%================================================================
+
+\subsection{A Robotic Interpretation of AFM}
+\label{afm:mrs-interpretation}
+The interpretation of AFM in a multi-robot system follows the above mentioned generic interpretation.  Each robot is modelled as an agent and each task is modelled as a spatial location.  The robots repeatedly select tasks and if the robot is outside a fixed task boundary, it navigates towards the task.  If the robot is within the task boundary it remains there until the end of the time step when a new (or the same) task is selected.
+The distance between a task and a robot is simply the physical distance and the sensitivities are recorded as specific values on each robot.
+The urgency values of the tasks are calculated based on the number of robots attending each task and the updated urgency values are communicated to the robots.
+
+The sensing of the distance between the tasks and robots as well as the communication of urgency values are non-trivial in a robotic system.  Both the sensing and communication can be done either locally by the individual robots or centrally, through an overhead camera and a global communication network.
+%==================================================================
 \section{Communication in biological social systems}
 \label{bio-comm}
-Communication plays a central role in self-regulated DOL of biological social systems.In this section, communication among  social insects are briefly reviewed.
+Communication plays a central role in self-regulated DOL of biological social systems. In this section, communication among  social insects are briefly reviewed.
 %
 \subsection{Purposes, modalities and ranges}
-Communication in biological societies serves many closely related social purposes. Most P2P communication include: recruitment to a new food source or nest site, exchange of food particles, recognition of individuals, simple attraction, grooming, sexual communication etc. In addition to that colony-level broadcast communication include: alarm signal, territorial and home range signals and nest markers, communication for achieving certain group effect such as, facilitating or inhibiting  a group activity \citep{Holldobler1990}.
-%\begin{table}
-%\caption{Common communication modalities in biological social systems}
-%\label{table:bio-comm-modalities}
-%\begin{center}
-%\begin{threeparttable}
-%\begin{tabular}{|l|l|l|}
-%\hline \textbf{Modality} & \textbf{Range} & \textbf{Information type}\\
-%\hline Sound & Long\tnote{a} & Advertising about food  source,  danger etc. \\                                                                                                                                               
-%\hline Vision & Short\tnote{b}  & Private, e.g. courtship display. \\
-%\hline Chemical  & Short/long & Various messages, e.g. food location, alarm etc.\\
-%\hline Tactile & Short & Qualitative info, e.g. quality of flower,\\ & & peer identification etc.\\
-%\hline Electric & Short/long & Mostly advertising types, e.g. aggression messages.\\
-%\hline
-%\end{tabular}
-%\begin{tablenotes}
-%\item [a]Depending on the type of species, long range signals can reach from a few metres to several kilometres.
-%\item [b]Short range typically covers from few mm to about a metre or so.
-%\end{tablenotes}
-%\end{threeparttable}
-%\end{center}
-%\end{table}
-%[Modalities and Ranges]
-Biological social insects use different modalities to establish social communication, such as, sound, vision, chemical, tactile,  electric and so forth (Table \ref{table:bio-comm-modalities}).  Sound waves can travel a long distance and thus they are suitable for advertising signals. They are also best for transmitting complicated information quickly \citep{Slater1986}. Visual signals can travel more rapidly than sound, but they are limited by the physical size or line of sight of an animal. They also do not travel around obstacles. Thus they are suitable for short-distance private signals.\\
-%% FIG. Fireflies
-%\begin{figure}[htp]
-%\centering
-%\subfigure[Flashing fireflies]
-%{
-%\includegraphics[width=6cm, height=4cm]{./photos/fire-flies.eps}
-%\hspace{0.25cm}
-%\includegraphics[width=6cm, height=4cm]{./photos/firefly-light-under.eps}
-%}
-%\caption{(a) Flashing lights of fireflies displaying their synchronous behaviours (b) A firefly can produce light to signal other fireflies. %\protect\newline 
-%From http://www.letsjapan.markmode.com.} % last seen on 01/06/2010.}
-%\label{fig:fireflies}
-%\end{figure}
-%
-In ants and some other social insects, chemical communication is predominant. Any kind of chemical substance that is used for communication between intra-species or inter-species is termed as {\em semiochemical} \citep{Holldobler1990}. A pheromone is a semiochemical, usually a type of glandular secretion, used for communication within species. One individual releases it as a signal and others respond to it after tasting or smelling. Using pheromones individuals can code quite complicated messages in smells. If wind and other conditions are favourable,  this type of signals emitted by such a tiny species can be detected from several kilometres away. Thus chemical signals are extremely economical of their production and transmission. But they are quite slow to diffuse away. But ants and other social insects manage to create sequential and compound messages either by a graded reaction of different concentrations of same substance or by blends of signals.
+Communication in biological societies serves many closely related social purposes. Most P2P communication include: recruitment to a new food source or nest site, exchange of food particles, recognition of individuals, simple attraction, grooming, sexual communication. In addition to that colony-level broadcast communication include: alarm signal, territorial and home range signals and nest markers \citep{Holldobler1990}.
 
-Tactile communication is also widely observed in ants and other species typically by using their body antennae and forelegs. It is observed that in ants touch is primarily used  for receiving information rather than informing something. It is usually found as an invitation behaviour in worker recruitment process. When an ant intends to recruit a nest-mate for foraging or other tasks it runs upto a nest-mate and beats her body very lightly with  antennae and forelegs. The recruiter then runs to a recently laid pheromone trail or lays a new one. In this form of communication limited amount of information is exchanged. In underwater environment some fishes and other species also communicate through electric signals where their nerves and muscles work as batteries. They use continuous or intermittent pulses with  different frequencies to learn about environment and to convey their identity and aggression messages.
+Biological social insects use different modalities to establish social communication, such as, sound, vision, chemical, tactile,  electric and so forth.  Sound waves can travel a long distance and thus they are suitable for advertising signals. They are also best for transmitting complicated information quickly \citep{Slater1986}. Visual signals can travel more rapidly than sound, but they are limited by the physical size or line of sight of an animal. They also do not travel around obstacles. Thus they are suitable for short-distance private signals.\\
+
+In ants and some other social insects, chemical communication is predominant \citep{Holldobler1990}. A pheromone is a chemical substance, usually a type of glandular secretion, used for communication within species. One individual releases it as a signal and others respond to it after tasting or smelling. Using pheromones individuals can code quite complicated messages in smells. If wind and other conditions are favourable,  this type of signals emitted by such a tiny species can be detected from several kilometres away. Thus chemical signals are extremely economical of their production and transmission. But they are quite slow to diffuse away. But ants and other social insects manage to create sequential and compound messages either by a graded reaction of different concentrations of same substance or by blends of signals.
+
+Tactile communication is also widely observed in ants and other species typically by using their body antennae and forelegs. It is observed that in ants touch is primarily used  for receiving information rather than informing something. It is usually found as an invitation behaviour in worker recruitment process. When an ant intends to recruit a nest-mate for foraging or other tasks it runs upto a nest-mate and beats her body very lightly with  antennae and forelegs. The recruiter then runs to a recently laid pheromone trail or lays a new one. In underwater environment some fishes and other species also communicate through electric signals where their nerves and muscles work as batteries. They use continuous or intermittent pulses with  different frequencies to learn about environment and to convey their identity and aggression messages.
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Signal active space and locality}
@@ -272,72 +206,19 @@ Tactile communication is also widely observed in ants and other species typicall
 \caption{Pheromone active space observed in ants, reproduced from \protect\cite{Holldobler1990}.}
 \label{fig:ants-active-space} % Give a unique label
 \end{figure}
-The concept of active space (AS) is widely used to describe the propagation of signals by species. In a network environment of signal emitters and receivers, active space is defined as the area encompassed by the signal during the course of transmission \citep{Mcgregor2000}. The concept of active space is described somewhat differently in case some social insects. In case of ants, this active space is defined as a zone within which the concentration of pheromone (or any other behaviourally active chemical substances) is at or above threshold concentration \citep{Holldobler1990}. Mathematically this is denoted by a ratio:
-\begin{equation}
-AS = \frac{\textit{Amount of pheromone emitted (Q)}}{\textit{Threshold concentration at which the receiving ant responds (K)}}
-\end{equation}
-Here, Q is measured in number of molecules released in a burst or in per unit of time whereas K is measured in molecules per unit of volume. 
+The concept of active space (AS) is widely used to describe the propagation of signals by species. In a network environment of signal emitters and receivers, active space is defined as the area encompassed by the signal during the course of transmission \citep{Mcgregor2000}. The concept of active space is described somewhat differently in case some social insects. In case of ants, this active space is defined as a zone within which the concentration of pheromone (or any other behaviourally active chemical substances) is at or above threshold concentration \citep{Holldobler1990}.
+  
 Fig. \ref{fig:ants-active-space} shows the use of active spaces of two species of ants: (a) {\em Atta texana} and (b) {\em Myrmicaria eumenoides}.  The former one uses two different concentrations of {\em 4-methyl-3-heptanone} to create attraction and alarm signals, whereas the latter one uses two different chemicals: {\em Beta-pinene} and {\em Limonene} to create similar kinds signals, i.e. alerting and circling.
- 
-The adjustment of this ratio enables individuals to gain a shorter fade-out time and permits signals to be more sharply pinpointed in time and space by the receivers. In order to transmit the location of the animal in the signal, the rate of information transfer can be increased by either lowering the rate of emission of Q or by increasing K, or both. For alarm and trail systems a lower value of this ratio is used. Thus, according to need, individuals regulate their active space by making it large or small, or by reaching their maximum radius quickly or slowly, or by enduring briefly or for a long period of time. From the precise study of pheromones it has been found that active space of alarm signal is consists of a concentric pair of hemispheres (Fig. \ref{fig:ants-active-space}). As an ant enters the outer zone, she is attracted inward toward the point source; when she next crosses into the central hemisphere she become alarmed. It is also observed that ants can release pheromones with different active spaces.
-%% indirect & b/c comm
-%\begin{figure}
-%\begin{minipage}[t]{0.48\linewidth}
-%\centering
-%\includegraphics[width=6cm, height=4cm, angle=0]
-%{./photos/ants_group_comm_bioteams_com.eps}
-%\caption{A group of ants following pheromone-trail. %\protect\newline 
-%From http://www.bioteams.com, last seen on 01/06/2010.}
-%\label{fig:ant-indirect} % Give a unique label
-%\end{minipage}
-%\hspace{0.5cm}
-%\begin{minipage}[t]{0.48\linewidth}
-%\centering
-%\includegraphics[width=6cm,height=3.5cm, angle=0]{./photos/honey-bee-waggle-dance-knol-google.eps}
-%\caption{ A dancing honey-bee (\protect{\em centre}) and its followers. 
-%%\protect\newline 
-%From http://knol.google.com, last seen on 01/06/2010.}
-%\label{fig:honey-bee-local-bc} % Give a unique label
-%\end{minipage}
-%\end{figure}
+ According to need, individuals regulate their active space by making it large or small, or by reaching their maximum radius quickly or slowly, or by enduring briefly or for a long period of time. From the precise study of pheromones it has been found that active space of alarm signal is consists of a concentric pair of hemispheres (Fig. \ref{fig:ants-active-space}). As an ant enters the outer zone, she is attracted inward toward the point source; when she next crosses into the central hemisphere she become alarmed. It is also observed that ants can release pheromones with different active spaces.
+%%
 Active space has strong role in modulating the behaviours of ants. For example, when workers of {\em Acanthomyops claviger} ants produce alarm signal due to an attack by a rival or insect predator, workers sitting a few millimetres away begin to react within seconds. However, those ants sitting a few centimetres away take a minute or longer to react. In many cases, ants and other social insects exhibit modulatory communication within their active space where many individuals involve in many different tasks. For example, while retrieving the large prey, workers of {\em Aphaeonogerter} ants produce chirping sounds (known as \textit{stridulate}) along with releasing poison gland pheromones. These sounds attract more workers and keep them within the vicinity of the dead prey to protect it from their competitors. This communication amplification behaviour can increase the active space to a maximum distance of 2 meters.
-\begin{table}
-\caption{Common communication strategies in biological social systems}
-\label{table:bio-comm-strategy}
-\begin{center}
-\begin{tabular}{|l|l|}
-\hline 
-\textbf{Communication strategy} & \textbf{Common modalities used}\\
-\hline 
-Indirect & Chemical and electric \\
-%\hline 
-P2P &  Vision and tactile\\
-%\hline 
-Local broadcast &  Sound, chemical and vision\\
-%\hline 
-Global broadcast & Sound, chemical and electric\\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
+
 %%%%%%%%%%%%%%%%%%%%%
 \subsection{Common communication strategies}
 \label{bg:bio-comm:strategies}
 %%%
-% FIG. Honey bee dance language
-%\begin{figure}
-%\centering
-%\subfigure[Honey-bee's waggle dance]
-%{
-%\includegraphics[width=6cm, height=4cm]{./photos/honey-bee-round-dance.eps}
-%\hspace{0.25cm}
-%\includegraphics[width=6cm, height=4cm]{./photos/honey-bee-waggle-dance.eps}
-%}
-%\caption{Examples of local broadcast communication of honey-bees: (a) Honey-bees show waggle-dance (making figure of 8) when food is far and (b) they show round-dance without any waggle when food is closer (within about 75m of hive). From \protect\cite{Slater1986}.}
-%\label{fig:honey-bee-dances}
-%\end{figure}
 %%
-In biological social systems, we can find all different sorts of communication strategies ranging from indirect pheromone trail laying to local and global broadcast of various signals. Sec. \ref{bg:def:comm} discusses the most common four communication strategies in natural and artificial world, i.e. indirect, P2P, local and global broadcast communication strategies. Table \ref{table:bio-comm-strategy} lists the use of various communication modalities under different communication strategies. Here we give a few real examples of those strategies from biological social systems. In biological literature, the pheromone trail laying is one of the most discussed indirect communication strategy among various species of ants. Fig. \ref{fig:ant-indirect} shows a pheromone trail following of a group of foraging ants. This indirect communication strategy effectively helps ants to find a better food source among multiple sources, find shorter distance to a food source, marking nest site and move there etc. \citep{Hughes2008}. Direct P2P communication strategy is also very common among most of the biological species. Fig. \ref{fig:bees-ants-p2p-comm} shows P2P communication of ants and honey-bees. This tactile form of communication is very effective to exchange food item, flower nectar with each-other or this can be useful even in recruiting nest-mates to a new food source or nest-site.
+In biological social systems, we can find all different sorts of communication strategies ranging from indirect pheromone trail laying to local and global broadcast of various signals. The most common four communication strategies are indirect, P2P, local and global broadcast communication strategies. The pheromone trail laying is one of the most discussed indirect communication strategy among various species of ants. Fig. \ref{fig:ant-indirect} shows a pheromone trail following of a group of foraging ants. This indirect communication strategy effectively helps ants to find a better food source among multiple sources, find shorter distance to a food source, marking nest site and move there etc. \citep{Hughes2008}. Direct P2P communication strategy is also very common among most of the biological species. Fig. \ref{fig:bees-ants-p2p-comm} shows P2P communication of ants and honey-bees. This tactile form of communication is very effective to exchange food item, flower nectar with each-other or this can be useful even in recruiting nest-mates to a new food source or nest-site.
 %%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \centering
@@ -354,9 +235,18 @@ In biological social systems, we can find all different sorts of communication s
 %%-----------------------------------------------------
 \subsection{Roles of communication in task-allocation}
 \label{bg:bio-comm:comm-role}
+%%
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5cm, angle=-90]
+{./images/honey-bee-dance-stat.eps}
+%figure caption is below the figure
+\caption{Self-regulation in honey-bee's dance communication behaviours, produced after the results of \protect\cite{Von1967} honey-bee round-dance experiment performed on 24 August 1962.}
+\label{fig:honey-bee-dance-stat}  % Give a unique label
+\end{figure}
 Communication among nest-mates and sensing of tasks are the integral parts of the self-regulated DOL process in biological social systems. They create necessary  preconditions for switching from one tasks to another or to attend dynamic urgent tasks. Suitable communication strategies favour individuals to select a better tasks. For example, \cite{Garnier+2007} reported two worker-recruitment experiments on black garden ants and honey-bees. The scout ants of {\em Lasius niger}  recruit uninformed ants to food source using a well-laid pheromone trails. {\em Apis mellifera} honey-bees also recruit nest-mates to newly discovered distant flower sources through waggle-dances. In the experiments,  poor food sources were given first to both ants and honey-bees. After some time,  rich food sources were introduced  to them. It was found that only honey-bees were able to switch from poor source to a rich source using their sophisticated dance communication.
 %%
-\begin{table}
+\begin{table}[htp]
 \caption{Self-regulation of communication behaviours in biological social systems}
 \label{table:bio-comm-task-urgency}
 \begin{center}
@@ -379,69 +269,22 @@ food sources & & evaporates and more ants joins\\
 %%%%%%%%%%%%%%%%%
 Table \ref{table:bio-comm-task-urgency} presents the link between sensing the task and self-regulation of communication behaviours among ants and honey-bees. Here, we can see that communication is modulated based on the perception of  task-urgency irrespective of the communication strategy of a particular species. Under indirect communication strategy of ants, i.e. pheromone trail-laying, we can see that the principles of self-organization, e.g. positive and negative feedbacks take place due to the presence of different amount of pheromones for different time periods. Initially, food source located at shorter distance gets relatively more ants  as the ants take less time to return nest. So, more pheromone deposits can be found in this path as a result of positive feedback process.  Thus, the density of pheromones or the strength of indirect communication link reinforces ants to follow this particular trail.
 %%
-\begin{figure}
-\centering
-\includegraphics[width=5cm, angle=-90]
-{./images/honey-bee-dance-stat.eps}
-%figure caption is below the figure
-\caption{Self-regulation in honey-bee's dance communication behaviours, produced after the results of \protect\cite{Von1967} honey-bee round-dance experiment performed on 24 August 1962.}
-\label{fig:honey-bee-dance-stat}  % Give a unique label
-\end{figure}
-%%
 Similarly, perception of task-urgency influences the P2P and broadcast communication strategies. {\em Leptothorax albipennis} ant take lees time in assessing a relatively better nest site and quickly return home to recruit its nest-mates \citep{Pratt+2002}. Here, the quality of nest directly influences its intent to make more ``tandem-runs'' or to do tactile communication with nest-mates. We have already discussed about the influences of the quality of  flower sources to honey-bee dance.  Fig. \ref{fig:honey-bee-dance-stat} shows this phenomena more vividly. It has been plotted using the data from the honey-bee round-dance experiments of \cite[p. 45]{Von1967}. In this plot, Y1 line refers to the concentration of sugar solution. This solution was kept in a bowl  to attract honey-bees and the amount of this solution was varied from $\frac{3}{16}$M to 2M (taken as 100\%). In this experiment, the variation of this control parameter influenced honey-bees' communication behaviours while producing an excellent self-regulated DOL.
 
 In Fig. \ref{fig:honey-bee-dance-stat} Y2 line represents the number of collector bees that return home. The total number of collectors was 55 (taken as 100\%). Y3 line plots the percent of collectors displaying round dances. We can see that the fraction of dancing collectors is directly proportional to the concentration of sugar solution or the sensing of task-urgency. Similarly, the average duration of dance per bee  is plotted in Y4 line. The maximum dancing period was 23.8s (taken as 100\%). Finally, from Y5 line we can see the outcome of the round-dance communication as the number of newly recruited bees to the feeding place. The maximum number of recruited bees was 18 (taken as 100\%). So, from an overall observation, we can see that bees sense the concentration of food-source  as the task-urgency and they self-regulate their round-dance communication behaviour according to their perception of this task-urgency. Thus, this self-regulated dancing behaviour of honey-bees attracts an optimal number of inactive bees to work.
 
 Broadcast communication is one of the classic ways to handle dynamic and urgent tasks in biological social systems. It can be commonly observed in birds, ants, bees and many other species. Table \ref{table:bio-comm-task-urgency} mentions about the alarm communication of ants. Similar to the honey-bee's dance communication, ants has a rich language of chemical communication that can produce words through blending of different glandular secretions in different concentrations. Fig. \ref{fig:ants-active-space} shows how ants can use different concentrations of chemicals to make different stimulus for other ants. From the study of ants, it is clear to us that taking defensive actions, upon sensing a danger, is one of the highest-priority tasks in an ant colony. Thus, for this highly urgent task, ants almost always use their global broadcast communication strategy through their strong chemical signals and they make sure all individuals can hear about this task.  This gives us a coherent picture of the self-regulation of biological species based on their perception of task-urgency.
-\begin{figure}
-\centering
-\subfigure[]
-{
-\includegraphics[width=6cm, height=4cm]{./photos/Wasps_wikimedia.org_Polistes_nest_3_sjh.eps}
-\hspace{0.25cm}
-\includegraphics[width=6cm, height=4cm]{./photos/Polybia_occidentalis_I_JP6646_discoverlife.org.eps}
-} 
-\caption{Colony founding in two types of social wasps (a) {\em Polistes}  founds colony by a few queens independently (b) {\em Polybia occidentalis}  founds colony by swarms. From http://www.discoverlife.org.} % last seen 01/05/2010.}
-\label{fig:social-wasps}
-\end{figure}
 %%-----------------------------------------------
 \subsection{Effect of group size on communication}
 \label{bg:bio-comm:group-size}
-The performance of cooperative tasks in large group of individuals also depends on the communication and sensing strategies adopted by the group. As introduced in Sec. \ref{intro:comm}, from the study of social wasps,  we can find that depending on the group size, different kinds of information flow occur in different types of social wasps \citep{Jeanne1999}. Polistes independent founders (Fig. \ref {fig:social-wasps}(a)) are species in which reproductive females establish colonies alone or in small groups with about $10^2$ individuals at maturity. Polybia swarm founders (Fig. \ref {fig:social-wasps}(b)) initiates colonies by swarm of workers and queens. They have a large number of individuals, in the order of $10^6$ and 20\% of them can be queen. 
-\begin{figure}[htp]
-\centering
-\includegraphics[width=8cm, angle=0]
-{./images/jannae-fig10-info-flow-cmp.eps}
-%figure caption is below the figure
-\caption{Different patterns of information flow in two types of social wasps: polybia and polistes, reproduced from \protect\cite{Jeanne1999}.}
-\label{fig:wasps-info-flow}  % Give a unique label
-\end{figure}
-%%
-%\begin{figure}[htp]
-%\centering
-%\includegraphics[width=6cm, angle=0]
-%{./images/jeanne-fig9-info-flow.eps}
-%%figure caption is below the figure
-%\caption{Information flow in polybia social wasps, reproduced from \protect\cite{Jeanne1999}.}
-%\label{figs:sf-wasps-info-flow}  % Give a unique label
-%\end{figure}
-Fig. \ref{fig:wasps-info-flow} compares the occurrence of information flow among independent and swarm founders. In case of swarm founders information about nest-construction or broods food-demand can not reach to foragers directly.  Among the swarm founders for nest construction. The works of {\em pulp foragers} and {\em water foragers} depend largely on their communication with {\em builders}. On the other hand, in case of independent founders there is no such communication and sensing are present among individuals. In Sec. \ref{intro:comm} we have termed these two types communication and sensing strategies as GSNC (for independent founders) and LSLC (swarm founders).
+The performance of cooperative tasks in large group of individuals also depends on the communication and sensing strategies adopted by the group. Depending on the group size, different kinds of information flow occur in different types of social wasps \citep{Jeanne1999}. Polistes independent founders  are species in which reproductive females establish colonies alone or in small groups with about $10^2$ individuals at maturity. Polybia swarm founders initiates colonies by swarm of workers and queens. They have a large number of individuals, in the order of $10^6$ and 20\% of them can be queen. In case of swarm founders information about nest-construction or broods food-demand can not reach to foragers directly.  Among the swarm founders for nest construction. The works of {\em pulp foragers} and {\em water foragers} depend largely on their communication with {\em builders}. On the other hand, in case of independent founders there is no such communication and sensing are present among individuals.
 
-\cite{Jeanne1999} explained the above phenomena of selecting different strategies in terms of task-specialization patterns and stochastic properties found in the group. In case of large colonies, many individuals repeatedly performs same tasks as this minimizes their interferences, although they still have a little probability to select a different task randomly. But because of the large group size, the queuing delay in inter-task switching keeps this task-switching probability very low. Thus, in swarm founders, task-specialization becomes very high among individuals. On the other hand, in small group of independent founders, specialization on a specific task is very costly, because this prevents individuals not to do other tasks whose task-urgencies can soon become very high. Thus these individuals tend to become generalist and do not communicate task information with each other.
-%%
-The above interesting findings on GSNC and LSLC in social wasps have been linked up with  the group productivity of wasps. \cite{Jeanne1999} reported high group productivity in case of LSLC of swarm founders. The per capita productivity was measured as the number of cells built in the nest and the weight of dry brood in grams. In case of independent founders this productivity is much lesser (max. 24 cells per queen at the time the first offspring observed) comparing to the thousands of cells produced by swarm founders.  This shows  us the direct link between high productivity of social wasps and their selection of LSLC strategy. These fascinating findings from wasp colonies have motivated us to test these communication and sensing strategies in a fairly large multi-robot system to achieve an effective self-regulated MRTA.
+The above interesting findings from social wasps have been linked up with  the group productivity of wasps. \cite{Jeanne1999} reported high group productivity in case of LSLC of swarm founders. The per capita productivity was measured as the number of cells built in the nest and the weight of dry brood in grams. In case of independent founders this productivity is much lesser (max. 24 cells per queen at the time the first offspring observed) comparing to the thousands of cells produced by swarm founders.  This shows  us the direct link between high productivity of social wasps and their selection of LSLC strategy. These fascinating findings from wasp colonies have motivated us to test these communication and sensing strategies in a fairly large multi-robot system to achieve an effective self-regulated MRTA.
 %==============================================================
 \section{Communication in multi-robot systems}
 \label{mrs-comm}
 \label{bg:mrs-comm}
-Communication plays an important role for any high-level interaction (e.g. cooperative or coordinative) among a multi-robot team \cite{Arkin1998}. %This is not a prerequisite for the group to be functioning, but often act as a useful component of multi-robot system. The characteristics of communication in multi-robot system can be presented in terms of these issues:
-%\begin{itemize}
-%\item Rationale of communication: {\em why do the robots communicate?} 
-%\item Message content: {\em what do they communicate?} 
-%\item Communication modalities: {\em How do they communicate?} 
-%\item Target recipients: {\em With whom do they communicate?}
-%\end{itemize}
-Below we have described the dominant issues of communication among multi-robot teams with a focus on how communication  can lead to produce effective MRTA solutions.
+Communication plays an important role for any high-level interaction e.g. cooperation among a multi-robot team. Below we have described the dominant issues of communication among multi-robot teams with a focus on how communication  can lead to produce effective MRTA solutions.
 %-----------
 \subsection{Rationale of communication}
 Most of the robotic researchers generally agree that communication in multi-robot system usually provides several major benefits. Robots can exchange potential information based on their spatial position and knowledge of past events. This, in turn, leads to improve perception over a distributed region without directly sensing it. In order to perform (or stop performing) certain tasks simultaneously or in a particular order, robots need to communicate, or signal, to each other. Communication can help a lot to influence each-other in a team that, in turn, enables robots to interact and negotiate their actions effectively.
@@ -455,34 +298,20 @@ Although communication provides several benefits for team-work it is costly to p
 \textbf{- Environmental state:} Free and blocked paths, level of interference found, any urgent event or dangerous changes found in the environment.\\
 \textbf{- Intentions:} Detail plan for doing a task or sequences of selected actions.
 %% 
- %Since a multi-robot system can be comprised of robots of various computation and communication capabilities, these information contents can vary greatly based on their individual communication modules and channel capacities.
 %------------------------------------------
 \subsection{Communication modalities}
-%\begin{figure}
-%\centering
-%\subfigure[ E-puck robots with table-lamps and Sniffing Khepera III]
-%{\includegraphics[width=6cm, height=4cm]{./photos/distributed_table_lamp_triangle.eps}
-%\hspace{0.25cm}
-%\includegraphics[width=6cm, height=4cm]{./photos/odor_loc_khepera3odorprototype300x169.eps}}
-%\caption{ (a) A fleet of mobile ``lighting" robots moving on a large table, such that the swarm of robots form a distributed table light and (b) Distributed odour source localization by Khephera robot equipped with volatile organic compound sensor and an anemometer (wind sensor). From http://http://disal.epfl.ch, last seen~01/06/2010.}
-%\label{fig:epfl-disal}
-%\end{figure}
-%%
-%%
 Robotic researchers typically use robot's on-board wireless radio, infra-red (IR), vision and sound hardware modules for robot-robot and robot-host communication. The reduction in price of wireless radio hardware chips e.g. wifi (ad-hoc WLAN 802.11 network) or Bluetooth makes it possible to use wireless radio communication widely. Inexpensive IR communication module is also typically built into almost all mobile robots due to its low-cost and suitability for ambient light and obstacle detection. IR can also be used for low bandwidth communication in short-ranges, e.g. keen-recognition. Most robots can also produce basic sound waves and detect it with their built-in speakers and on-board microphones. 
-
-%Most of the mobile robots come with a series of LEDs, and tiny camera that can emit light signals and detect it with camera. Many robots can also detect blobs of colours and can recognize peers of other objects through the use of a color-coded markers. Although a lot of researches have been carried out to design robot skin and tactile communication system, we do not know any instance of tactile communication used in multi-robot team. In terms of chemical communication, \cite{Lochmatter+2007} showed  limited success in odour-source localization, a form of detecting chemical signals.
 %-----------------------------
 \subsection{Communication strategies}
-\begin{figure}
-\centering
-\includegraphics[width=6cm, angle=0]
-{./images/mrs-comm-complexities.eps}
-%figure caption is below the figure
-\caption{Three aspects of communication in multi-robot system}
-\label{fig:mrs-comm-strategies} % Give a unique label
-\end{figure}
-Whatever be the communication modalities of a multi-robot system, suitable strategies are required to disseminate information in a timely manner to a target audience that maximizes the effective task-completion and minimizes delays and conflicts. In order to discuss the complexities of communication strategies we have selected three independent scales: organization, expressiveness and range of communication. With these independent aspects, we can measure the level of complexities in communication and classify a multi-robot system according to its communication characteristics. Fig. \ref{fig:mrs-comm-strategies} outlines these scales and we have described them  below.
+%\begin{figure}
+%\centering
+%\includegraphics[width=6cm, angle=0]
+%{./images/mrs-comm-complexities.eps}
+%%figure caption is below the figure
+%\caption{Three aspects of communication in multi-robot system}
+%\label{fig:mrs-comm-strategies} % Give a unique label
+%\end{figure}
+Whatever be the communication modalities of a multi-robot system, suitable strategies are required to disseminate information in a timely manner to a target audience that maximizes the effective task-completion and minimizes delays and conflicts. The complexities of communication strategies can be elaborated in terms of three independent aspects: organization, expressiveness and range of communication. These are described below.
 %%
 \subsection*{Organization of communication structure}
 Communication in a multi-robot system can be organized using an external/internal central entity (e.g. a server PC, or a leader robot) or, a few leader robots, or by using decentralized or local schemes where every robot has the option to communicate with every other robot of the team. From a recent study of multi-robot flocking \cite{Celikkanat+2008} have shown that a mobile robot flock can be steered toward a desired direction through externally guiding some of its members, i.e. the flock relies on multiple leaders or information repositories. Note that here task-allocation is fully decentralized i.e. each robot selects its task, but the communication structure is hybrid; robots communicate with each other and with a centralized entity.
@@ -661,12 +490,11 @@ We have designed a set of  manufacturing shop-floor scenario experiments for val
 %\subsection{Parameters}
 In order to observe the self-regulated MRTA, we have designed our experiments to record the following  observables in each time-step:\\
 %\begin{enumerate}
-- Task-urgency of each task ($\phi$),\\
-- Number of robots engaged in each task,\\
-- Task-sensitizations ($k$) of robots,\\
-- Pose data of robots,\\
-- Communication of task-information message with robots.
-  
+task-urgency of each task ($\phi$),%\\
+number of robots engaged in each task,%\\
+task-sensitizations ($k$) of robots,%\\
+pose data of robots and %\\
+communication of task-information messages.
 %\end{enumerate}
 Table \ref{table:params} lists a set of common parameters of our  experiments. The initial values of task urgencies correspond to 100 units of production work-load without any maintenance work-load as outlined in Eq. \ref{eqn:task-urgency-prod-init}. For task-urgency (and task-sensitization) limits, we choose a limit of 0 and 1, where 0 means no urgency (complete forgetting) of a task and 1 means maximum urgency (or full specialization) of that task. We choose a initial sensitization value of 0.1 for all tasks. 
 %
@@ -717,7 +545,7 @@ Q^G_{avg}= \frac{1}{N}\sum_{i=1}^{N} q^i_{k=k_{max}}
 \end{equation}
 In Eq. \ref{eqn:Q-G}, $q^i_{k=k_{max}}$ represents the time-step of robot $r_i$  where its sensitization value $k$ reaches the peak $k_{max}$ as discussed above. By averaging this peak time-step values of all robots we can have an overall idea of how many task-execution cycles are spent to reach the maximum task-specialization value $K^G_{avg}$.
 Based on Eq. \ref{eqn:K-G} and Eq. \ref{eqn:Q-G}, we have got the peak task-sensitization $K^G_{avg} 
-$ values: 0.40 (SD=0.08)  and 0.30 (SD=0.03), and their respective time-step $Q^G_{avg}$ values: 38 (SD=13) and 18 (SD=5) time-step.  They are shown in Fig. \ref{fig:task-specialization}. Here we can see that the robots in Series A had higher chances of task-specialization than that of Series B experiments.
+$ values: 0.40 (SD=0.08)  and 0.30 (SD=0.03), and their respective time-step $Q^G_{avg}$ values: 38 (SD=13) and 18 (SD=5) time-step. Here the robots in Series A had higher chances of task-specialization than that of Series B experiments.
 %%%
 %%% Communication load %%%
 Fig. \ref{fig:signal-frequency-stat} presents the frequency of signalling task information by TaskServer. Since the duration of each time step is 50s long and TaskServer emits signal in every 2.5s, there is an average of 20 signals in each time-step.
@@ -843,26 +671,24 @@ From task-performance data of Series C we have got average production completion
 For APMW, Series C experiments give us an average time length of 359 time-steps (1795s). In this period we calculated APMW and it is 5 time-steps with SD = 17 time-steps and $\chi$ = 0.023420. For Series D experiments, from the average 357 time-steps (1575s) of maintenance activity of our robots per experiment run, we have got APMW, $\chi$ = 0.005359 which corresponds to the pending work of 2 time-steps (10s) where SD = 7 time-steps.
 %%-------------------------------------------------
 %%
-\begin{figure}
-\begin{minipage}[t]{0.48\linewidth}
-\centering
-\includegraphics[width=6cm, height=4cm, angle=0]{images/K-Group.eps}
-\caption{\small Task-specialization of robots.}
-\label{fig:K-Group} 
-\end{minipage} 
-\hspace{0.5cm}
-\begin{minipage}[t]{0.48\linewidth}
-\centering
-\includegraphics[width=6cm, height=4cm, angle=0]
-{images/Q-Group.eps}
-\caption{\small Time-steps to reach the peak values of task-specialization.}
-\label{fig:Q-G-SC-SD} 
-\end{minipage}
-\end{figure}
+%\begin{figure}
+%\begin{minipage}[t]{0.48\linewidth}
+%\centering
+%\includegraphics[width=6cm, height=4cm, angle=0]{images/K-Group.eps}
+%\caption{\small Task-specialization of robots.}
+%\label{fig:K-Group} 
+%\end{minipage} 
+%\hspace{0.5cm}
+%\begin{minipage}[t]{0.48\linewidth}
+%\centering
+%\includegraphics[width=6cm, height=4cm, angle=0]
+%{images/Q-Group.eps}
+%\caption{\small Time-steps to reach the peak values of task-specialization.}
+%\label{fig:Q-G-SC-SD} 
+%\end{minipage}
+%\end{figure}
 %%
-By applying Eq. \ref{eqn:K-G} and Eq. \ref{eqn:Q-G} on our robots' task-sensitization statistics, we have got the peak task-sensitization $K^G_{avg}$ values: 0.39 (SD=0.17) and 0.27 (SD=0.10), and their respective time-step $Q^G_{avg}$ values: 13 (SD=7) and 11 (SD=5) time-step. They are shown in Fig. \ref{fig:K-G-SC-SD} and Fig. \ref{fig:Q-G-SC-SD}. Here we can see that the robots in Series C exhibited higher task-specialization than that of Series D experiments.\\
-%%-------------------------------------------------
-%We have aggregated the changes in translation motion of all robots over time following an approach similar to task-urgency aggregation as described in Sec. \ref{validation:results}. The robot translation results from both local mode experiments are plotted in Fig. \ref{fig:translation-SC-SD}. In this plot we can see that robot translations also vary over varying task requirements of tasks.\\ 
+By applying Eq. \ref{eqn:K-G} and Eq. \ref{eqn:Q-G} on our robots' task-sensitization statistics, we have got the peak task-sensitization $K^G_{avg}$ values: 0.39 (SD=0.17) and 0.27 (SD=0.10), and their respective time-step $Q^G_{avg}$ values: 13 (SD=7) and 11 (SD=5) time-step.
 %-----------------------------------------------------------
 \subsection{Comparisons}
 Results from Series C and Series D experiments show us many similarities and differences with respect to the results of Series A and Series B experiments. Both Series C and Series D experiments show similar APCD values: 1.42 and 1.46 respectively, which are significantly less than Series B experiment result (APCD = 2.3) and are close to Series A experiment result (APCD = 1.22). This means that for large group, task-performance  is efficient under LSLC strategy (Series C and Series D) comparing with their GSNC counterpart (Series B).
